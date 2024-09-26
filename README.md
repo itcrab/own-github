@@ -6,7 +6,7 @@ New times force us to bring up our own services on our private local network.
 
 # Synology setup
 
-### Gitea (with SQLite3)
+### Gitea (with SQLite3) + Actions by Gitea Act Runner
 `compose.yml`
 ```YML
 version: "3"
