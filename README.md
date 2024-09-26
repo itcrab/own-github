@@ -13,7 +13,7 @@ version: "3"
 
 services:
   gitea_web:
-    image: gitea/gitea:1.21.7
+    image: gitea/gitea:1.21.11
     container_name: gitea
     environment:
       - USER_UID=1000
@@ -24,6 +24,19 @@ services:
     ports:
       - "10022:22"
       - "3000:3000"
+  gitea_act_runner:
+    image: gitea/act_runner:0.2.11
+    container_name: gitea_act_runner
+    depends_on:
+      - gitea_web
+    environment:
+      - GITEA_RUNNER_REGISTRATION_TOKEN={{ TOKEN }}
+      - GITEA_INSTANCE_URL=http://gitea:3000
+      - GITEA_RUNNER_NAME=gitea_runner  
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /volume1/docker/gitea_runner/data:/data
 ```
 
 ### Gogs (with SQLite3)
